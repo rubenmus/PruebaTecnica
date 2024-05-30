@@ -1,0 +1,21 @@
+<app-filter
+(filterHeroEvent)="filterHeroes($event)"
+></app-filter>
+<mat-divider></mat-divider>
+
+<div *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <ul>
+    <li *ngFor="let hero of heroes">
+      <label>Nombre: </label><p>{{hero.name | titlecase}}</p>
+      <label>Inteligencia: </label><p>{{hero.intelligence}}</p>
+      <label>Velocidad: </label><p>{{hero.speed}}</p>
+      <label>Poder: </label><p>{{hero.power}}</p>
+      <button mat-raised-button color="accent" (click)="editHero(hero.id)">Editar</button>
+      <button mat-raised-button color="warn" (click)="deleteHero(hero.id)">Borrar</button>
+    </li>
+  </ul>
+</div>
