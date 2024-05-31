@@ -1,3 +1,33 @@
-:host {
-  display: block;
+.heroes-list ul {
+  list-style-type: none;
+  padding: 0;
 }
+
+.hero-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.hero-label, .hero-button {
+  margin-right: 10px;
+}
+
+.hero-item p {
+  margin: 0 10px 0 0;
+  flex-grow: 1;
+}
+
+button[mat-raised-button] {
+  margin-top: 20px;
+}
+
+.hero-button {
+  display: flex;
+  gap: 10px;
+}
+

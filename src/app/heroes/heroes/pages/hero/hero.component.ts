@@ -59,7 +59,7 @@ export class HeroComponent implements OnInit{
     })
   }
 
-  deleteHero(id: number){
+  deleteHero(id: string){
     if(!id){
       return;
     }
@@ -69,8 +69,11 @@ export class HeroComponent implements OnInit{
       this.openSnackBar()
     })
   }
-  editHero(id: number){
+  editHero(id: string){
     this.router.navigate([`heroes/${id}/edit`]);
+  }
+  newHero(){
+    this.router.navigate([`new`]);
   }
   filterHeroes(event: string){
     this.isLoading=true

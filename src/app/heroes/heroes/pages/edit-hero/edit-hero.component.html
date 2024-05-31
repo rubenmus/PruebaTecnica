@@ -1,3 +1,4 @@
+<button mat-raised-button color="primary" (click)="returnHome()">Volver</button>
 <div class="container">
   <form [formGroup]="heroForm" (ngSubmit)="updateHero()">
       <label for="name">Name:</label>
@@ -9,6 +10,6 @@
       <label for="power">Poder:</label>
       <input id="power" type="text" formControlName="power">
 
-      <button type="submit">Save</button>
+      <button type="submit" class="save-button">Save</button>
     </form>
 </div>

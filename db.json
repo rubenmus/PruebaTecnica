@@ -1,6 +1,13 @@
 {
   "heroes": [
     {
+      "id": "1",
+      "name": "Batman",
+      "speed": 100,
+      "power": "60",
+      "intelligence": 80
+    },
+    {
       "id": "2",
       "name": "Flash",
       "intelligence": 80,
@@ -10,9 +17,16 @@
     {
       "id": "3",
       "name": "Superman",
-      "speed": 100,
+      "speed": "200",
       "power": 50,
       "intelligence": "60"
+    },
+    {
+      "id": "g5RsL5-",
+      "name": "Linterna verde",
+      "speed": "2",
+      "power": "111",
+      "intelligence": "2"
     }
   ]
 }

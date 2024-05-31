@@ -17,7 +17,7 @@ private baseUrl: string = 'http://localhost:3000/heroes';
   getHeroes(): Observable<Hero[]>{
     return this.http.get<Hero[]>(this.baseUrl);
   }
-  getHero(id: number): Observable<Hero|undefined>{
+  getHero(id: string): Observable<Hero|undefined>{
     return this.http.get<Hero>(`${this.baseUrl}/${id}`)
     .pipe(
       catchError(error => of(undefined))
@@ -31,7 +31,7 @@ private baseUrl: string = 'http://localhost:3000/heroes';
 
     return this.http.put(`${this.baseUrl}/${hero.id}`, hero);
   }
-  deleteHero(id: number): Observable<boolean>{
+  deleteHero(id: string): Observable<boolean>{
     return this.http.delete(`${this.baseUrl}/${id}`)
     .pipe(
       map(resp => true),
