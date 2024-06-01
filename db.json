@@ -3,23 +3,30 @@
     {
       "id": "1",
       "name": "Batman",
-      "speed": 100,
-      "power": "70",
-      "intelligence": 80
+      "speed": 40,
+      "power": 40,
+      "intelligence": 100
     },
     {
       "id": "2",
       "name": "Flash",
-      "intelligence": 80,
       "speed": 100,
-      "power": 0
+      "power": 60,
+      "intelligence": 60
     },
     {
       "id": "3",
       "name": "Superman",
-      "speed": "200",
-      "power": 50,
-      "intelligence": "60"
+      "speed": 100,
+      "power": 100,
+      "intelligence": 50
+    },
+    {
+      "id": "22AE0GT",
+      "name": "spiderman",
+      "speed": 40,
+      "power": 60,
+      "intelligence": 80
     }
   ]
 }
