@@ -15,7 +15,7 @@
       <label class="hero-label">Poder: </label><p>{{hero.power}}</p>
       <div class="hero-button">
         <button mat-raised-button color="primary" (click)="editHero(hero.id)">Editar</button>
-        <button mat-raised-button color="warn" (click)="deleteHero(hero.id)">Borrar</button>
+        <button mat-raised-button color="warn" (click)="deleteHero(hero.id, hero.name)">Borrar</button>
       </div>
     </li>
   </ul>

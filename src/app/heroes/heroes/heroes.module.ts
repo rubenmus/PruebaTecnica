@@ -7,9 +7,7 @@ import { HeroComponent } from './pages/hero/hero.component';
 
 
 @NgModule({
-  declarations: [
-  //TODO page declarations
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     MaterialModule,

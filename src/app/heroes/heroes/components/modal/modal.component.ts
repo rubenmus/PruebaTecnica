@@ -1,14 +1,33 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Hero } from '../../interfaces/hero.interface';
+import { MaterialModule } from 'src/app/material/material.module';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
   imports: [
     CommonModule,
+    MaterialModule,
+    ModalComponent
   ],
-  template: `<p>modal works!</p>`,
+  templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent { }
+export class ModalComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<ModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: string,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
+  onConfirm():void {
+    this.dialogRef.close(true)
+  }
+}

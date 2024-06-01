@@ -4,7 +4,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { HeroesService } from '../../service/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from '../../interfaces/hero.interface';
-import { Subject, debounceTime, distinctUntilChanged, pipe, switchMap, tap } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
 import { FilterComponent } from '../../components/filter/filter.component';
 import {
   MatSnackBar,
@@ -13,6 +13,8 @@ import {
   MatSnackBarLabel,
   MatSnackBarRef,
 } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../../components/modal/modal.component';
 @Component({
   selector: 'app-hero',
   standalone: true,
@@ -20,6 +22,7 @@ import {
     CommonModule,
     MaterialModule,
     FilterComponent,
+    ModalComponent
     ],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css'],
@@ -36,7 +39,9 @@ export class HeroComponent implements OnInit{
     private heroesService: HeroesService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
+
   ){
     this.searchHero$.pipe(
       debounceTime(1000),
@@ -59,15 +64,24 @@ export class HeroComponent implements OnInit{
     })
   }
 
-  deleteHero(id: string){
+  deleteHero(id: string, name: string){
     if(!id){
       return;
     }
-    this.heroesService.deleteHero(id).pipe(
-    ).subscribe(_deleted=>{
-      this.heroes = this.heroes.filter( (heroes:Hero) => heroes.id != id);
-      this.openSnackBar()
-    })
+    const dialogRef = this.dialog.open( ModalComponent, {
+      data: name
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter( (result: boolean) => result ),
+        switchMap( () => this.heroesService.deleteHero(id)),
+        filter( (wasDeleted: boolean) => wasDeleted ),
+      )
+      .subscribe(() => {
+        this.heroes = this.heroes.filter( (heroes:Hero) => heroes.id != id);
+        this.openSnackBar()
+      });
   }
   editHero(id: string){
     this.router.navigate([`heroes/${id}/edit`]);
@@ -78,10 +92,6 @@ export class HeroComponent implements OnInit{
   filterHeroes(event: string){
     this.isLoading=true
     this.searchHero$.next(event);
-    // this.heroesService.getHeroByName(event).subscribe((data:Hero[])=>{
-    //   this.heroes=data
-    //   this.isLoading=false
-    // })
   }
   openSnackBar() {
     this._snackBar.open('Heroe eliminado', '', {
