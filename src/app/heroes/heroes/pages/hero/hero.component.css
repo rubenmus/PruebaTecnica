@@ -17,6 +17,13 @@
   border-bottom: 1px solid #ccc;
 }
 
+.hero-info {
+  display: flex;
+  align-items: center;
+  flex-basis: calc(20% - 10px);
+  margin-right: 10px;
+}
+
 .hero-label, .hero-button {
   margin-right: 10px;
 }
@@ -32,6 +39,7 @@ button[mat-raised-button] {
 
 .hero-button {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
