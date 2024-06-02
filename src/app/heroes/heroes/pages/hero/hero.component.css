@@ -1,3 +1,7 @@
+.container{
+  padding: 20px 15px 0 15px;
+}
+
 .heroes-list ul {
   list-style-type: none;
   padding: 0;
