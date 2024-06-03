@@ -44,11 +44,11 @@ describe('NewHeroComponent', () => {
   });
 
   it('should show snack bar if form is invalid', () => {
-    spyOn(component, 'openSnackBarNotName');
+    spyOn(component, 'openSnackBar');
 
     component.newHero();
 
-    expect(component.openSnackBarNotName).toHaveBeenCalled();
+    expect(component.openSnackBar).toHaveBeenCalled();
     expect(mockHeroesService.addHero).not.toHaveBeenCalled();
     expect(mockSnackBar.open).not.toHaveBeenCalled();
     expect(mockRouter.navigateByUrl).not.toHaveBeenCalled();

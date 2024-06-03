@@ -55,7 +55,15 @@ export class HeroComponent implements OnInit{
 
   ngOnInit(): void {
     this.heroesService.getHeroes()
+    .pipe(
+      catchError(error => {
+        this.openSnackBar('Fallo en el servicio en la carga de heroes')
+        return of(undefined)}),
+    )
     .subscribe(data=>{
+      if(!data){
+        return;
+      }
       this.isLoading = false;
       this.heroes = data;
     })
