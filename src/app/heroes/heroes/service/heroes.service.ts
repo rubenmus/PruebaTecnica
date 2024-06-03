@@ -18,10 +18,7 @@ private baseUrl: string = 'http://localhost:3000/heroes';
     return this.http.get<Hero[]>(this.baseUrl);
   }
   getHero(id: string): Observable<Hero|undefined>{
-    return this.http.get<Hero>(`${this.baseUrl}/${id}`)
-    .pipe(
-      catchError(error => of(undefined))
-    );
+    return this.http.get<Hero>(`${this.baseUrl}/${id}`);
   }
   addHero(hero: Hero){
     return this.http.post(this.baseUrl,hero);
