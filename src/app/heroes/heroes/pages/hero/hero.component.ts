@@ -1,17 +1,13 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from 'src/app/material/material.module';
 import { HeroesService } from '../../service/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from '../../interfaces/hero.interface';
-import { Subject, debounceTime, distinctUntilChanged, filter, pipe, switchMap, tap } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { FilterComponent } from '../../components/filter/filter.component';
 import {
-  MatSnackBar,
-  MatSnackBarAction,
-  MatSnackBarActions,
-  MatSnackBarLabel,
-  MatSnackBarRef,
+  MatSnackBar
 } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../components/modal/modal.component';
@@ -94,7 +90,7 @@ export class HeroComponent implements OnInit{
     this.searchHero$.next(event);
   }
   openSnackBar() {
-    this._snackBar.open('Heroe eliminado', '', {
+    this._snackBar.open('Héroe eliminado', '', {
       duration: 2000
     });
   }

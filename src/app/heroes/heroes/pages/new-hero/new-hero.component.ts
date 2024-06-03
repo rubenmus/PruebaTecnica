@@ -65,12 +65,12 @@ export class NewHeroComponent implements OnInit {
     })
   }
   openSnackBar() {
-    this._snackBar.open(`El heroe ${this.heroForm.value.name} se ha creado`, '', {
+    this._snackBar.open(`El héroe ${this.heroForm.value.name} se ha creado`, '', {
       duration: 2000
     });
   }
   openSnackBarNotName() {
-    this._snackBar.open(`El heroe necesita un nombre`, '', {
+    this._snackBar.open(`El héroe necesita un nombre`, '', {
       duration: 2000
     });
   }

@@ -74,7 +74,7 @@ export class EditHeroComponent implements OnInit {
     })
   }
   openSnackBar() {
-    this._snackBar.open('Heroe editado', '', {
+    this._snackBar.open('Héroe editado', '', {
       duration: 2000
     });
   }

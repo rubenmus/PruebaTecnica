@@ -12,8 +12,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NewHeroComponent } from './heroes/heroes/pages/new-hero/new-hero.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditHeroComponent } from './heroes/heroes/pages/edit-hero/edit-hero.component';
-import { FilterComponent } from './heroes/heroes/components/filter/filter.component';
-import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({

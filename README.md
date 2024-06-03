@@ -12,7 +12,7 @@ Run `npm run json` for a back serve.
 
 ## Install json-server
 
-If the json serve does not work or gives an error install this version 0.17.4. Is important the version.
+If the json serve does not work or gives an error, install this version 0.17.4. Is important the version.
 
 Run `npm i -g json-serve@0.17.4` for global install.
 Run `npm i json-serve@0.17.4` for local install.
