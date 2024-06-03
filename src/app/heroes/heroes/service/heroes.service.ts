@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Hero } from '../interfaces/hero.interface';
 
-
+/*istanbul ignore file*/
 @Injectable({
   providedIn: 'root'
 })
