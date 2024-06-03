@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Subject, debounceTime } from 'rxjs';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { MaterialModule } from 'src/app/material/material.module';
 
 @Component({

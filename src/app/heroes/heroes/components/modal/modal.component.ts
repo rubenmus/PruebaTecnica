@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Hero } from '../../interfaces/hero.interface';
 import { MaterialModule } from 'src/app/material/material.module';
 
 @Component({
