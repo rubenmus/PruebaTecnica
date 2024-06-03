@@ -9,8 +9,7 @@ import { MaterialModule } from 'src/app/material/material.module';
   standalone: true,
   imports: [
     CommonModule,
-    MaterialModule,
-    ModalComponent
+    MaterialModule
   ],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
