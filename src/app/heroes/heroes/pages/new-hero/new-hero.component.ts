@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Hero } from '../../interfaces/hero.interface';
 import { MaterialModule } from 'src/app/material/material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-new-hero',
@@ -47,7 +48,7 @@ export class NewHeroComponent implements OnInit {
 
   newHero(){
     if(!this.heroForm.valid){
-      this.openSnackBarNotName()
+      this.openSnackBar(`El héroe necesita un nombre`)
       return;
     }
     const updatedHero: Hero = {
@@ -58,20 +59,21 @@ export class NewHeroComponent implements OnInit {
       intelligence: this.heroForm.value.intelligence ?? 0
     };
 
-    this.heroesService.addHero(updatedHero).subscribe(()=>{
+    this.heroesService.addHero(updatedHero)
+    .pipe(
+      catchError(error => {
+        this.openSnackBar('Fallo en el servicio al intentar crear un heroe')
+        return of(undefined)}),
+    )
+    .subscribe(()=>{
       this.router.navigate([`heroes`]);
-      this.openSnackBar()
+      this.openSnackBar(`El héroe ${this.heroForm.value.name} se ha creado`)
 
     })
   }
-  openSnackBar() {
-    this._snackBar.open(`El héroe ${this.heroForm.value.name} se ha creado`, '', {
-      duration: 2000
-    });
-  }
-  openSnackBarNotName() {
-    this._snackBar.open(`El héroe necesita un nombre`, '', {
-      duration: 2000
+  openSnackBar(m:string) {
+    this._snackBar.open(m, '', {
+      duration: 3000
     });
   }
  }

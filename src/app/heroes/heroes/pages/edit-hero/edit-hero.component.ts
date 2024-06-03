@@ -6,6 +6,7 @@ import { Hero } from '../../interfaces/hero.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-edit-hero',
@@ -37,11 +38,16 @@ export class EditHeroComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.heroesService.getHero(params['id']).subscribe((hero: Hero | undefined) => {
+      this.heroesService.getHero(params['id'])
+      .pipe(
+        catchError(error => {
+          this.openSnackBar('Fallo en el servicio al intentar encontrar al heroe a editar')
+          return of(undefined)}),
+      )
+      .subscribe((hero: Hero | undefined) => {
         if(!hero){
           return
         }
-        console.log(hero)
         this.heroForm.setValue({
           name: hero.name ?? '',
           intelligence: hero.intelligence ?? 0,
@@ -57,7 +63,7 @@ export class EditHeroComponent implements OnInit {
     }
   updateHero(){
     if(!this.heroForm.valid){
-      this.openSnackBarNotName()
+      this.openSnackBar(`El heroe necesita un nombre`)
       return;
     }
     const updatedHero: Hero = {
@@ -68,19 +74,20 @@ export class EditHeroComponent implements OnInit {
       intelligence: this.heroForm.value.intelligence ?? 0
     };
 
-    this.heroesService.updateHero(updatedHero).subscribe(()=>{
+    this.heroesService.updateHero(updatedHero)
+    .pipe(
+      catchError(error => {
+        this.openSnackBar('Fallo en el servicio al intentar editar un heroe')
+        return of(false)}),
+    )
+    .subscribe(()=>{
       this.router.navigate([`heroes`]);
-      this.openSnackBar()
+      this.openSnackBar('Héroe editado')
     })
   }
-  openSnackBar() {
-    this._snackBar.open('Héroe editado', '', {
-      duration: 2000
-    });
-  }
-  openSnackBarNotName() {
-    this._snackBar.open(`El heroe necesita un nombre`, '', {
-      duration: 2000
+  openSnackBar(m:string) {
+    this._snackBar.open(m, '', {
+      duration: 3000
     });
   }
 }

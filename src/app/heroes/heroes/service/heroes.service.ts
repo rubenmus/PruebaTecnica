@@ -35,7 +35,6 @@ private baseUrl: string = 'http://localhost:3000/heroes';
     return this.http.delete(`${this.baseUrl}/${id}`)
     .pipe(
       map(resp => true),
-      catchError(error => of(false)),
       );
   }
   getHeroByName(name: string): Observable<Hero[]> {

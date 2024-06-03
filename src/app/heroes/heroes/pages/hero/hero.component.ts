@@ -4,7 +4,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { HeroesService } from '../../service/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Hero } from '../../interfaces/hero.interface';
-import { Subject, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+import { Subject, catchError, debounceTime, distinctUntilChanged, filter, of, switchMap } from 'rxjs';
 import { FilterComponent } from '../../components/filter/filter.component';
 import {
   MatSnackBar
@@ -28,6 +28,7 @@ export class HeroComponent implements OnInit{
   public heroes: Hero[] = [];
   public isLoading = true;
   searchHero$ = new Subject<string>();
+  public message:string = '';
 
 
 
@@ -72,11 +73,14 @@ export class HeroComponent implements OnInit{
       .pipe(
         filter( (result: boolean) => result ),
         switchMap( () => this.heroesService.deleteHero(id)),
+        catchError(error => {
+          this.openSnackBar('Fallo en el servicio al intentar borrar')
+          return of(false)}),
         filter( (wasDeleted: boolean) => wasDeleted ),
       )
       .subscribe(() => {
         this.heroes = this.heroes.filter( (heroes:Hero) => heroes.id != id);
-        this.openSnackBar()
+        this.openSnackBar('Héroe eliminado')
       });
   }
   editHero(id: string){
@@ -89,9 +93,9 @@ export class HeroComponent implements OnInit{
     this.isLoading=true
     this.searchHero$.next(event);
   }
-  openSnackBar() {
-    this._snackBar.open('Héroe eliminado', '', {
-      duration: 2000
+  openSnackBar(m:string) {
+    this._snackBar.open(m, '', {
+      duration: 3000
     });
   }
  }
